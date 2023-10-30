@@ -16,8 +16,9 @@ import java.sql.SQLException;
 @WebServlet("/editurl")
 public class EditScreenServlet extends HttpServlet {
    private static final long serialVersionUID = 1L;
-   private static final String QUERY = "select " + "id, name, email, mobile, gender, dob, city " + "from employee "
-         + "where id=?";
+   private static final String QUERY = "select " + 
+         "id, name, email, mobile, gender, dob, city " + "from employee " + 
+         "where id=?";
 //   private static final String QUERY_UPD = "update employee "
 //         + "set name=?, email=?, mobile=?, gender=?, dob=?, city=? " + "where id=?";
 
@@ -58,36 +59,64 @@ public class EditScreenServlet extends HttpServlet {
             String dob = rs.getString("dob");
             String city = rs.getString("city");
 
-            pw.println("<form method='post' action='edit?id=+" + id + "  '>");
+            pw.println("<form method='post' action='edit?id=" + id + "  '>");
             pw.println("<table class='table table-hover table-striped'>");
             pw.println("<tr>" + 
                   "<td>Name</td> " + 
-                  "<td><input type='text' name='name' value='" + name + "'></td> " +
+                  "<td><input type='text' name='name' value='" + name + "'></td> " + 
                   "</tr>");
             pw.println("<tr>" + 
                   "<td>EMail</td> " + 
-                  "<td><input type='text' name='name' value='" + email + "'></td> " +
-                  "</tr>");
-            pw.println("<tr>" +
-                  "<td>Mbobile</td> " + 
-                  "<td><input type='text' name='name' value='" + mobile + "'></td> " + 
+                  "<td><input type='text' name='email' value='" + email + "'></td> " + 
                   "</tr>");
             pw.println("<tr>" + 
-                  "<td>Gender</td> " + 
-                  "<td><input type='text' name='name' value='" + gender + "'></td> " + 
+                  "<td>Mbobile</td> " + 
+                  "<td><input type='text' name='mobile' value='" + mobile + "'></td> " + 
                   "</tr>");
+
+            pw.println("<tr> <td>Gender</td> <td>");
+
+            if (gender.equals("male")) {
+               pw.println("<input type='radio' name='gender' value='male' checked='true'>Male &nbsp; &nbsp; " + 
+               "<input type='radio' name='gender' value='female' >Female ");
+            } else {
+               pw.println("<input type='radio' name='gender' value='male'>Male &nbsp; &nbsp; " + 
+               "<input type='radio' name='gender' value='female'  checked='true'>Female ");
+            }
+
+            pw.println("</td> </tr>");
+
             pw.println("<tr>" + 
                   "<td>DOB</td> " + 
-                  "<td><input type='date' name='name' value='" + dob + "'></td> " + 
+                  "<td><input type='date' name='dob' value='" + dob + "'></td> " + 
                   "</tr>");
+
+            pw.println("<tr> <td>City</td> <td> <select name='city'> ");
+
+            if (city.equals("Ussuriisk")) {
+               pw.println("<option type='text' value='" + city + "' selected='true'>Ussuriisk</option>");
+            } else {
+               pw.println("<option type='text' value='" + city + "'>Ussuriisk</option>");
+            }
+            
+            if (city.equals("Vladivostok")) {
+               pw.println("<option type='text' value='" + city + "' selected='true'>Vladivostok</option>");
+            } else {
+               pw.println("<option type='text' value='" + city + "'>Vladivostok</option>");
+            }
+            
+            if (city.equals("Minsk")) {
+               pw.println("<option type='text' value='" + city + "' selected='true'>Minsk</option>");
+            } else {
+               pw.println("<option type='text' value='" + city + "'>Minsk</option>");
+            }
+
+            pw.println(" </select></td> </tr>");
+
             pw.println("<tr>" + 
-                  "<td>City</td> " + 
-                  "<td><input type='text' name='name' value='" + city + "'></td> " + 
-                  "</tr>");
-            pw.println("<tr>" + 
-                  "<td><button type='submit' class='btn btn-outline-success'>Update</button></td>" +
-                  "<td><button type='reset' class='btn btn-outline-danger'>Cancel</button></td>" + 
-                  "</tr>");
+               "<td><button type='submit' class='btn btn-outline-success'>Update</button></td>" + 
+               "<td><button type='reset' class='btn btn-outline-danger'>Cancel</button></td>" + 
+               "</tr>");
             pw.println("</table>");
             pw.println("</form>");
          } else {
