@@ -38,13 +38,13 @@ public class ShowUsersServlet extends HttpServlet {
       res.setContentType("text/html");
       
       try {
-         Class.forName("org.h2.Driver");
+         Class.forName(DbName.dbDriver);
          
       } catch (Exception e) {
          e.printStackTrace();
       }
       
-      try (Connection conn = DriverManager.getConnection("jdbc:h2:file:~/h2db/demo", "sa", "");
+      try (Connection conn = DriverManager.getConnection(DbName.dbName, DbName.userName, DbName.pass);
             PreparedStatement ps = conn.prepareStatement(QUERY)) {
          ResultSet rs = ps.executeQuery();
          

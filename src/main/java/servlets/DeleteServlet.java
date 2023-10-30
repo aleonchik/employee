@@ -31,7 +31,7 @@ public class DeleteServlet extends HttpServlet {
       pw.println("<link rel='stylesheet' href='css/bootstrap.css'></link>");
       
       try {
-         Class.forName("org.h2.Driver");
+         Class.forName(DbName.dbDriver);
          
       } catch (Exception e) {
          e.printStackTrace();
@@ -39,7 +39,7 @@ public class DeleteServlet extends HttpServlet {
       
       pw.println("<div class='card' style='margin:auto; width:60%; margin-top:100px'>");
       
-      try (Connection conn = DriverManager.getConnection("jdbc:h2:file:~/h2db/demo", "sa", "");
+      try (Connection conn = DriverManager.getConnection(DbName.dbName, DbName.userName, DbName.pass);
             PreparedStatement ps = conn.prepareStatement(QUERY)) {
          ps.setInt(1, id);
          

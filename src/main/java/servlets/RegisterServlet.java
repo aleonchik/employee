@@ -44,7 +44,7 @@ public class RegisterServlet extends HttpServlet {
 //      Connection conn;
       
       try {
-         Class.forName("org.h2.Driver");
+         Class.forName(DbName.dbDriver);
          
       } catch (Exception e) {
          e.printStackTrace();
@@ -52,7 +52,7 @@ public class RegisterServlet extends HttpServlet {
       
       pw.println("<div class='card' style='margin:auto; width:300px; margin-top:100px'>");
       
-      try (Connection conn = DriverManager.getConnection("jdbc:h2:file:~/h2db/demo", "sa", "");
+      try (Connection conn = DriverManager.getConnection(DbName.dbName, DbName.userName, DbName.pass);
             PreparedStatement ps = conn.prepareStatement(QUERY)) {
          ps.setString(1, name);
          ps.setString(2, email);
