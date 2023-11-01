@@ -17,9 +17,9 @@ import java.sql.SQLException;
 public class ShowUsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private final static String QUERY = "select " +
-         "id, name, email, mobile, gender, dob, city " +
-         "from employee";
+	private final static String QUERY = "select " 
+	      + "id, name, email, mobile, gender, dob, city " 
+	      + "from employee";
 
        
     public ShowUsersServlet() {
@@ -52,18 +52,18 @@ public class ShowUsersServlet extends HttpServlet {
          
          pw.println("<table class='table table-hover table-striped'>");
          
-         pw.println("<tr>" +
-               "<th>ID</th>" +
-               "<th>Name</th>" +
-               "<th>EMail</th>" +
-               "<th>Mobile</th>" +
-               "<th>Gender</th>" +
-               "<th>DOB</th>" +
-               "<th>City</th>" +
-               "<th>Edit</th>" +
-               "<th>Delete</th>" +
-               "</tr>");
-         
+         pw.println("<tr>" 
+               + "<th>ID</th>" 
+               + "<th>Name</th>" 
+               + "<th>EMail</th>" 
+               + "<th>Mobile</th>" 
+               + "<th>Gender</th>"
+               + "<th>DOB</th>" 
+               + "<th>City</th>" 
+               + "<th>Edit</th>" 
+               + "<th>Delete</th>" 
+               + "</tr>");
+
          while (rs.next()) {
             pw.println("<tr>\n" +
             "<td>" + rs.getInt(1) + "</td>\n" +
@@ -73,7 +73,7 @@ public class ShowUsersServlet extends HttpServlet {
             "<td>" + rs.getString(5) + "</td>\n" +
             "<td>" + rs.getString(6) + "</td>\n" +
             "<td>" + rs.getString(7) + "</td>\n" +
-            "<td> <a href='editurl?id=" + rs.getInt(1) + "'><b>Edit</b></a></td>\n" +
+            "<td> <a href='editurl?id=" + rs.getInt(1) + "'><b>Edit</b></a></td>" +
             "<td> <a href='deleteurl?id=" + rs.getInt(1) + "'><b>Delete</b></a></td>\n" +
             "</tr>");
          }

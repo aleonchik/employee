@@ -18,7 +18,8 @@ public class EditRecorsServlet extends HttpServlet {
    private static final long serialVersionUID = 1L;
    
    private static final String QUERY = "update employee "
-         + "set name=?, email=?, mobile=?, gender=?, dob=?, city=? " + "where id=?";
+         + "set name=?, email=?, mobile=?, gender=?, dob=?, city=? " 
+         + "where id=?";
 
    public EditRecorsServlet() {
       super();
@@ -37,40 +38,46 @@ public class EditRecorsServlet extends HttpServlet {
       String dob = req.getParameter("dob");
       String city = req.getParameter("city");
       
-
       res.setContentType("text/html");
       pw.println("<link rel='stylesheet' href='css/bootstrap.css'></link>");
-//
-//      try {
-//         Class.forName("org.h2.Driver");
-//
-//      } catch (Exception e) {
-//         e.printStackTrace();
-//      }
+
+      try {
+         Class.forName(DbName.dbDriver);
+
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
 
       pw.println("<div class='card' style='margin:auto; width:60%; margin-top:100px'>");
       
       pw.println(id); pw.println("<br>");
       pw.println(name + "<br>" + email + "<br>" + mobile + "<br>" + gender + "<br>" + dob + "<br>" + city);
       
-//      try (Connection conn = DriverManager.getConnection("jdbc:h2:file:~/h2db/demo", "sa", "");
-//            PreparedStatement ps = conn.prepareStatement(QUERY)) {
-//         ps.setInt(1, );
-//         
-//         int count = ps.executeUpdate();
-//         
-//         if (count == 1) {
-//            pw.println("<h2 class='bg-danger text-light text-center'>Record deleted</h2>");
-//         } else {
-//            pw.println("<h2 class='bg-danger text-light text-center'>Record is NOT deleted</h2>");
-//         }
-//      } catch (SQLException e) {
-//         pw.println("<h2 class='bg-danger text-light text-center'>" + e.getMessage() + "</h2>");
-//         e.printStackTrace();
-//      } catch (Exception ex) {
-//         ex.printStackTrace();
-//      }
-//      
+      try (Connection conn = DriverManager.getConnection(DbName.dbName, DbName.userName, DbName.pass);
+            PreparedStatement ps = conn.prepareStatement(QUERY)) {
+         
+         ps.setString(1, name);
+         ps.setString(2, email);
+         ps.setString(3, mobile);
+         ps.setString(4, gender);
+         ps.setString(5, dob);
+         ps.setString(6, city);
+         ps.setInt(7, id);
+         
+         int count = ps.executeUpdate();
+         
+         if (count == 1) {
+            pw.println("<h2 class='bg-danger text-light text-center'>Record updated</h2>");
+         } else {
+            pw.println("<h2 class='bg-danger text-light text-center'>Record is NOT updated</h2>");
+         }
+      } catch (SQLException e) {
+         pw.println("<h2 class='bg-danger text-light text-center'>" + e.getMessage() + "</h2>");
+         e.printStackTrace();
+      } catch (Exception ex) {
+         ex.printStackTrace();
+      }
+      
       pw.println("<a href='index.html'><button class='btn btn-outline-success'>Home</button></a> &nbsp; &nbsp;");
       pw.println("<a href='showdata'><button class='btn btn-outline-success'>Show users</button></a>");
       pw.println("</div>");

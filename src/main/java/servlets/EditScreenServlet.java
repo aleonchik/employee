@@ -67,7 +67,7 @@ public class EditScreenServlet extends HttpServlet {
                   "</tr>");
             pw.println("<tr>" + 
                   "<td>EMail</td> " + 
-                  "<td><input type='text' name='email' value='" + email + "'></td> " + 
+                  "<td><input type='email' name='email' value='" + email + "'></td> " + 
                   "</tr>");
             pw.println("<tr>" + 
                   "<td>Mbobile</td> " + 
